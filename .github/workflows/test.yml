@@ -25,4 +25,4 @@ jobs:
         run: cp ./.env.example ./.env
 
       - name: Run Test Script
-        run: npm run test:integration    
+        run: chmod u+x ./scripts/run-integration.sh && npm run test:integration    
