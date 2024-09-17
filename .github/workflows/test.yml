@@ -1,4 +1,5 @@
-name : Test Pipeline
+name: Test Pipeline
+
 on:
   push:
     branches:
@@ -10,10 +11,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Display Docker version
         run: docker --version
@@ -25,4 +30,6 @@ jobs:
         run: cp ./.env.example ./.env
 
       - name: Run Test Script
-        run: chmod u+x ./scripts/run-integration.sh && npm run test:integration    
+        run: |
+          chmod u+x ./scripts/run-integration.sh
+          npm run test:integration
