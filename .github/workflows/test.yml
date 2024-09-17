@@ -15,14 +15,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Setup docker buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Display Docker version
+        run: docker --version
 
-      - name: Setup docker compose
-        uses: docker/setup-compose-action@v2
-
-      - name: Ensure Docker Compose is available
-        run: docker-compose version
+      - name: Display Docker Compose version
+        run: docker-compose --version
 
       - name: Copy .env.example to .env
         run: cp ./.env.example ./.env
